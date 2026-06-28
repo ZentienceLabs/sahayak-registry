@@ -29,6 +29,21 @@ sahayak cartridge install k8s        # resolves via the index, verifies the chec
 ```
 Add multiple registries (an official one + your private/internal one) — they're peers.
 
+## Verifying signatures (recommended)
+Cartridges in this registry are signed (ed25519). Trust this publisher's key, and installs
+will verify **authenticity** (who authored it) on top of the **checksum** (integrity):
+
+```
+sahayak cartridge trust add fulEJgyF8DPnFR7cKcB00whsinJc2KXHMy692WfY/3M=
+sahayak cartridge install k8s        # → "signature verified"
+```
+
+Public key for `ZentienceLabs/sahayak-registry`:
+```
+fulEJgyF8DPnFR7cKcB00whsinJc2KXHMy692WfY/3M=
+```
+To require signed cartridges only, set `SAHAYAK_REQUIRE_SIGNED=1`.
+
 ## Publishing a cartridge
 1. Author it: `sahayak cartridge build --name redis --kb redis-howto.md --templates redis.json`.
 2. Drop the JSON in `cartridges/`.
